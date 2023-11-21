@@ -158,3 +158,11 @@ vid/
 vidres/
 
 _.py
+
+#images
+*.png
+*.exr
+*.jpg
+
+*.zip
+*.json

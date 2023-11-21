@@ -805,6 +805,51 @@ yolact_plus_resnet50_config = yolact_plus_base_config.copy({
     }),
 })
 
+# ----------------------- COLUMN CONFIGS ----------------------- #
+# FIXME: add column dataset configurations
+
+COLUMN_CLASSES = ('bigpillar', 'hbeam')
+
+column_dataset = dataset_base.copy({
+    'name': 'Media Column',
+
+    'train_images': './data/column/images',
+    'valid_images': './data/column/images',
+    'test_images': './data/column/images',
+
+    'train_info': './data/column/annotations/train.json',
+    'valid_info': './data/column/annotations/valid.json',
+    'test_info': './data/column/annotations/test.json',
+
+    'class_names': COLUMN_CLASSES,
+})
+
+yolact_column_config = yolact_base_config.copy({
+    'name': 'yolact_column',
+
+    # Dataset stuff
+    'dataset': column_dataset,
+    'num_classes': len(column_dataset.class_names) + 1,
+
+    'backbone': yolact_base_config.backbone.copy({
+        'pred_aspect_ratios': [ [[1/2, 1/4, 1/6]] ] * 5,
+    }),
+})
+
+yolact_plus_column_config = yolact_plus_base_config.copy({
+    'name': 'yolact_plus_column',
+
+    # Dataset stuff
+    'dataset': column_dataset,
+    'num_classes': len(column_dataset.class_names) + 1,
+
+    'backbone': yolact_plus_base_config.backbone.copy({
+        'pred_aspect_ratios': [ [[1/2, 1/4, 1/6]] ] * 5,
+    }),
+})
+
+
+
 
 # Default config
 cfg = yolact_base_config.copy()
